@@ -1,0 +1,9 @@
+uuid: 17c77eb6-f4e4-4c6e-b0eb-d7fa4c722ebc
+langcode: en
+status: true
+dependencies: {  }
+name: 'Storage Unit'
+vid: storage_unit
+description: 'For example: MB, GB, TB...'
+weight: 0
+new_revision: false
