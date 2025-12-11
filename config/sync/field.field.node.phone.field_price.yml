@@ -1,0 +1,23 @@
+uuid: cc0963f3-02ff-48d3-9270-89b5658061d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_price
+    - node.type.phone
+id: node.phone.field_price
+field_name: field_price
+entity_type: node
+bundle: phone
+label: Price
+description: 'This is the retail price'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: $
+  suffix: ''
+field_type: integer
