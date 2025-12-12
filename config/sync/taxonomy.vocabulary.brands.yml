@@ -1,0 +1,9 @@
+uuid: 653e6e56-b232-40fc-9e28-7fe5f30c153c
+langcode: en
+status: true
+dependencies: {  }
+name: Brands
+vid: brands
+description: 'For example: Apple, Xiaomi, Samsung...'
+weight: 0
+new_revision: false
