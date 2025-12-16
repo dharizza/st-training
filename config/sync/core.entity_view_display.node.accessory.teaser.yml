@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
     - field.field.node.accessory.field_media_image
+    - field.field.node.accessory.field_on_sale
     - field.field.node.accessory.field_price
     - node.type.accessory
   module:
@@ -38,4 +39,5 @@ content:
 hidden:
   field_color: true
   field_media_image: true
+  field_on_sale: true
   field_price: true

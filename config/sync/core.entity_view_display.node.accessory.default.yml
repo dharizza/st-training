@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
     - field.field.node.accessory.field_media_image
+    - field.field.node.accessory.field_on_sale
     - field.field.node.accessory.field_price
     - node.type.accessory
   module:
@@ -46,6 +47,16 @@ content:
       link: false
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_on_sale:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 107
     region: content
   field_price:
     type: number_integer
