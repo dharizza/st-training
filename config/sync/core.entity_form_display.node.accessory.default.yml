@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.accessory.body
+    - field.field.node.accessory.field_price
     - node.type.accessory
     - workflows.workflow.editorial
   module:
@@ -30,6 +31,13 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_price:
+    type: number
+    weight: 9
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

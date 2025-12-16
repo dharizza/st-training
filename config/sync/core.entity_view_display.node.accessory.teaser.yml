@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.accessory.body
+    - field.field.node.accessory.field_price
     - node.type.accessory
   module:
     - text
@@ -32,4 +33,5 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  field_price: true
