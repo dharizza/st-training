@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.accessory.body
+    - field.field.node.accessory.field_category
     - field.field.node.accessory.field_color
     - field.field.node.accessory.field_in_stock_online
     - field.field.node.accessory.field_media_image
@@ -38,6 +39,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_category: true
   field_color: true
   field_in_stock_online: true
   field_media_image: true
