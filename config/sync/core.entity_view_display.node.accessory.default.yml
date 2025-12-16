@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.accessory.body
+    - field.field.node.accessory.field_color
     - field.field.node.accessory.field_price
     - node.type.accessory
   module:
+    - color_field
     - text
     - user
 id: node.accessory.default
@@ -25,6 +27,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: -20
+    region: content
+  field_color:
+    type: color_field_formatter_text
+    label: above
+    settings:
+      format: hex
+      opacity: true
+    third_party_settings: {  }
+    weight: 104
     region: content
   field_price:
     type: number_integer
