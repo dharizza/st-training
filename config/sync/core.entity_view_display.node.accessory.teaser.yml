@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
+    - field.field.node.accessory.field_in_stock_online
     - field.field.node.accessory.field_media_image
     - field.field.node.accessory.field_on_sale
     - field.field.node.accessory.field_price
@@ -38,6 +39,7 @@ content:
     region: content
 hidden:
   field_color: true
+  field_in_stock_online: true
   field_media_image: true
   field_on_sale: true
   field_price: true

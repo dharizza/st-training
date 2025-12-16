@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
+    - field.field.node.accessory.field_in_stock_online
     - field.field.node.accessory.field_media_image
     - field.field.node.accessory.field_on_sale
     - field.field.node.accessory.field_price
@@ -38,6 +39,16 @@ content:
       opacity: true
     third_party_settings: {  }
     weight: 104
+    region: content
+  field_in_stock_online:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 108
     region: content
   field_media_image:
     type: entity_reference_entity_view

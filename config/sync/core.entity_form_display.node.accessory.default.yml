@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
+    - field.field.node.accessory.field_in_stock_online
     - field.field.node.accessory.field_media_image
     - field.field.node.accessory.field_on_sale
     - field.field.node.accessory.field_price
@@ -43,6 +44,13 @@ content:
     region: content
     settings:
       default_colors: '#ac725e,#d06b64,#f83a22,#fa573c,#ff7537,#ffad46,#42d692,#16a765,#7bd148,#b3dc6c,#fbe983,#92e1c0,#9fe1e7,#9fc6e7,#4986e7,#9a9cff,#b99aff,#c2c2c2,#cabdbf,#cca6ac,#f691b2,#cd74e6,#a47ae2'
+    third_party_settings: {  }
+  field_in_stock_online:
+    type: boolean_checkbox
+    weight: 122
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_media_image:
     type: media_library_widget
