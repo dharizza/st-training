@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
+    - field.field.node.accessory.field_media_image
     - field.field.node.accessory.field_price
     - node.type.accessory
   module:
@@ -36,4 +37,5 @@ content:
     region: content
 hidden:
   field_color: true
+  field_media_image: true
   field_price: true

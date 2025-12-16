@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.accessory.body
     - field.field.node.accessory.field_color
+    - field.field.node.accessory.field_media_image
     - field.field.node.accessory.field_price
     - node.type.accessory
   module:
@@ -36,6 +37,15 @@ content:
       opacity: true
     third_party_settings: {  }
     weight: 104
+    region: content
+  field_media_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 106
     region: content
   field_price:
     type: number_integer
