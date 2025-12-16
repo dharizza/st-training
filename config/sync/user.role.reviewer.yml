@@ -3,12 +3,22 @@ langcode: en
 status: true
 dependencies:
   config:
+    - node.type.accessory
+    - node.type.phone
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - node
 id: reviewer
 label: Reviewer
 weight: -7
 is_admin: false
 permissions:
+  - 'revert accessory revisions'
+  - 'revert phone revisions'
+  - 'use editorial transition approve'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_published'
   - 'use editorial transition publish'
+  - 'view accessory revisions'
+  - 'view phone revisions'
