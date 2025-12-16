@@ -15,6 +15,7 @@ dependencies:
   module:
     - color_field
     - content_moderation
+    - cshs
     - media_library
     - path
     - text
@@ -40,14 +41,18 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_category:
-    type: entity_reference_autocomplete
+    type: cshs
     weight: 123
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      save_lineage: true
+      force_deepest: true
+      parent: null
+      level_labels: 'Category, Type'
+      hierarchy_depth: 0
+      required_depth: 0
+      none_label: '- Please select -'
+      allow_unpublished: false
     third_party_settings: {  }
   field_color:
     type: color_field_widget_box
