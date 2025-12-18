@@ -35,38 +35,51 @@ type_settings:
       published: true
       default_revision: true
   transitions:
+    approve:
+      label: Approve
+      from:
+        - in_review
+      to: published
+      weight: -2
     archive:
       label: Archive
       from:
         - published
       to: archived
-      weight: 2
+      weight: 0
     archived_draft:
       label: 'Restore to Draft'
       from:
         - archived
       to: draft
-      weight: 3
+      weight: 1
     archived_published:
       label: Restore
       from:
         - archived
       to: published
-      weight: 4
+      weight: 2
     create_new_draft:
       label: 'Create New Draft'
       from:
         - draft
         - published
       to: draft
-      weight: 0
+      weight: -4
     publish:
       label: Publish
       from:
         - draft
         - published
       to: published
-      weight: 1
+      weight: -1
+    send_to_review:
+      label: 'Send to review'
+      from:
+        - archived
+        - draft
+      to: in_review
+      weight: -3
   entity_types:
     node:
       - accessory
