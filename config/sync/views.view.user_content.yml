@@ -250,6 +250,11 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      use_more: true
+      use_more_always: true
+      use_more_text: more
+      link_display: custom_url
+      link_url: /admin/content
       header: {  }
       footer: {  }
       display_extenders: {  }
