@@ -44,6 +44,8 @@ final class HelloWorldController extends ControllerBase {
     // Print the title of the node.
     // dpm($node->title->value);
     // dpm($node->getTitle());
+    // How to print values from complex fields.
+    // dpm($node->field_brand->entity->name->value);
 
     if ($node) {
       $output = $this->t('Hello @name! The title of the node is @title.', [
