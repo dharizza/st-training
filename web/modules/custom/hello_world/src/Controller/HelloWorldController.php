@@ -14,11 +14,16 @@ final class HelloWorldController extends ControllerBase {
   /**
    * Builds the response.
    */
-  public function hello(): array {
+  public function hello($name = NULL): array {
+    $output = $this->t('Hello World!');
+
+    if ($name) {
+      $output = $this->t('Hello @name!', ['@name' => $name]);
+    }
 
     $build['content'] = [
       '#type' => 'item',
-      '#markup' => $this->t('Hello again!'),
+      '#markup' => $output,
     ];
 
     return $build;
