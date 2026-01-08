@@ -1,0 +1,33 @@
+uuid: 12a66e9f-dc17-4d82-8b45-efa0b8c2def8
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.phones
+  module:
+    - node
+    - views
+  theme:
+    - olivero
+id: olivero_views_block__phones_block_2
+theme: olivero
+region: sidebar
+weight: 0
+provider: null
+plugin: 'views_block:phones-block_2'
+settings:
+  id: 'views_block:phones-block_2'
+  label: 'Related phones'
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: 'Related phones'
+  items_per_page: null
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      accessory: accessory
