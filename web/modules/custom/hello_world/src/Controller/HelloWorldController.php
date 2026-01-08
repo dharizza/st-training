@@ -50,7 +50,7 @@ final class HelloWorldController extends ControllerBase {
     if ($node) {
       $output = $this->t('Hello @name! The title of the node is @title.', [
         '@name' => $name,
-        '@title' => $node->getTitle(),
+        '@title' => $node->toLink()->toString(),
       ]);
     } else {
       $output = $this->t('Hello @name! The node with the ID @id does not exist.', [
