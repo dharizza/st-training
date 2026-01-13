@@ -1,0 +1,4 @@
+tag articles:
+  title: 'Tag articles'
+  description: 'Adding tags to article nodes.'
+  # restrict access: true
