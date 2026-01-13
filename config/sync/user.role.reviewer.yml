@@ -8,6 +8,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - hello_world
     - node
 id: reviewer
 label: Reviewer
@@ -16,6 +17,7 @@ is_admin: false
 permissions:
   - 'revert accessory revisions'
   - 'revert phone revisions'
+  - 'tag articles'
   - 'use editorial transition approve'
   - 'use editorial transition archive'
   - 'use editorial transition archived_published'
