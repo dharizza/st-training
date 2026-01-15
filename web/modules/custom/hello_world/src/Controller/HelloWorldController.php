@@ -29,6 +29,8 @@ final class HelloWorldController extends ControllerBase {
         $name = $user->getDisplayName();
         $output = $this->t('Hello @name!', ['@name' => $name]);
       }
+    } else {
+      $output = $this->t('Hello @name!', ['@name' => $name]);
     }
 
     $build['content'] = [
