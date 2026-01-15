@@ -16,6 +16,7 @@ dependencies:
     - image
     - text
     - user
+    - youtube_video_formatter
 _core:
   default_config_hash: br6izr-iGEu--JvNbCJNtOBpRnxpFLXfoV5y61U9Nqc
 id: node.article.default
@@ -59,10 +60,10 @@ content:
     weight: 10
     region: content
   field_video_id:
-    type: string
+    type: youtube_video_formatter
     label: above
     settings:
-      link_to_entity: false
+      foo: bar
     third_party_settings: {  }
     weight: 111
     region: content
