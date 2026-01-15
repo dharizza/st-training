@@ -37,6 +37,13 @@ final class DownloadFilesForm extends FormBase {
       ],
     ];
 
+    $form['pass_phrase'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Email'),
+      '#description' => $this->t('Enter your email address to retrieve the file.'),
+      '#required' => TRUE,
+    ];
+
     $form['actions'] = [
       '#type' => 'actions',
       'submit' => [
