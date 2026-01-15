@@ -59,6 +59,7 @@ module:
   user: 0
   views_ui: 0
   workflows: 0
+  youtube_video_formatter: 0
   views: 10
   standard: 1000
 theme:
