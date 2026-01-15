@@ -20,7 +20,16 @@ final class HelloWorldController extends ControllerBase {
   public function hello($name = NULL): array {
     $output = $this->t('Hello World!');
 
-    if ($name) {
+    // If there is no name, we may want to use the name of the currently logged in user.
+    if (!$name) {
+      $user = \Drupal::currentUser();
+      // Check if the user is logged in and print its name. 
+      // If the user is anonymous then we continue to print Hello World.
+      if ($user->isAuthenticated()) {
+        $name = $user->getDisplayName();
+        $output = $this->t('Hello @name!', ['@name' => $name]);
+      }
+    } else {
       $output = $this->t('Hello @name!', ['@name' => $name]);
     }
 
