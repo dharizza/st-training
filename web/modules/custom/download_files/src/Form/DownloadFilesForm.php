@@ -24,9 +24,23 @@ final class DownloadFilesForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
-    $form['message'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Message'),
+    $form['media'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Select a file to download'),
+      '#options' => [
+          '1' => $this->t('One'),
+          '2' => [
+              '2.1' => $this->t('Two point one'),
+              '2.2' => $this->t('Two point two'),
+          ],
+          '3' => $this->t('Three'),
+      ],
+    ];
+
+    $form['pass_phrase'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Email'),
+      '#description' => $this->t('Enter your email address to retrieve the file.'),
       '#required' => TRUE,
     ];
 
