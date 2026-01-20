@@ -6,6 +6,7 @@ namespace Drupal\download_files\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
 
 /**
  * Provides a Download files form.
@@ -55,16 +56,29 @@ final class DownloadFilesForm extends FormBase {
    */
   public function getFilesOptions() {
     // Use database abstraction layer for getting managed files.
-    $results = \Drupal::database()
-      ->select('file_managed', 'f')
-      ->fields('f', ['filename', 'uri'])
-      ->condition('f.status', 1)
-      ->execute()
-      ->fetchAll();
+    // $results = \Drupal::database()
+    //   ->select('file_managed', 'f')
+    //   ->fields('f', ['filename', 'uri'])
+    //   ->condition('f.status', 1)
+    //   ->execute()
+    //   ->fetchAll();
+
+    // $options = [];
+    // foreach ($results as $file) {
+    //   $options[$file->uri] = $file->filename;
+    // }
+
+    // Use Entity Queries to get list of files.
+    $results = \Drupal::entityQuery('file')
+      ->condition('status', 1)
+      ->accessCheck()
+      ->execute();
+
+    $files = File::loadMultiple($results);
 
     $options = [];
-    foreach ($results as $file) {
-      $options[$file->uri] = $file->filename;
+    foreach ($files as $file) {
+      $options[$file->getFileUri()] = $file->getFilename();
     }
 
     return $options;
