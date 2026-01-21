@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.phone.field_brand
     - field.field.node.phone.field_color
     - field.field.node.phone.field_media_image
+    - field.field.node.phone.field_metatags
     - field.field.node.phone.field_model
     - field.field.node.phone.field_price
     - field.field.node.phone.field_storage
@@ -30,6 +31,11 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -40,7 +46,9 @@ hidden:
   field_brand: true
   field_color: true
   field_media_image: true
+  field_metatags: true
   field_model: true
   field_price: true
   field_storage: true
   field_storage_unit: true
+  search_api_excerpt: true

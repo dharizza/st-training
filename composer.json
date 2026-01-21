@@ -30,6 +30,7 @@
         "drupal/devel": "^5.4",
         "drupal/gin": "^5.0",
         "drupal/kint-kint": "^2.3",
+        "drupal/metatag": "^2.2",
         "drupal/search_api": "^1.40",
         "drupal/token": "^1.17",
         "drupal/webform": "^6.3@beta",
