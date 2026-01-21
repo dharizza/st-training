@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.phone.field_brand
     - field.field.node.phone.field_color
     - field.field.node.phone.field_media_image
+    - field.field.node.phone.field_metatags
     - field.field.node.phone.field_model
     - field.field.node.phone.field_price
     - field.field.node.phone.field_storage
@@ -15,6 +16,7 @@ dependencies:
     - node.type.phone
   module:
     - color_field
+    - metatag
     - text
     - user
 id: node.phone.default
@@ -28,6 +30,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
     region: content
   field_accessories:
     type: entity_reference_label
@@ -62,6 +69,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 109
     region: content
   field_model:
     type: string
@@ -102,4 +116,5 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  search_api_excerpt: true
