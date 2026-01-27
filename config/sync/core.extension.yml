@@ -21,8 +21,6 @@ module:
   cshs: 0
   datetime: 0
   dblog: 0
-  devel: 0
-  devel_generate: 0
   download_files: 0
   dynamic_page_cache: 0
   editor: 0
@@ -34,7 +32,6 @@ module:
   help: 0
   history: 0
   image: 0
-  kint: 0
   layout_builder: 0
   layout_discovery: 0
   link: 0
