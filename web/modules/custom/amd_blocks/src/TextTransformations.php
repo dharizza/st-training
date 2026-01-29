@@ -23,4 +23,11 @@ final class TextTransformations {
     return strtoupper($text);
   }
 
+  /**
+   * Lowercase all the text received. TEXT to text.
+   */
+  public function lowercase($text): string {
+    return strtolower($text);
+  }
+
 }
