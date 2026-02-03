@@ -34,10 +34,19 @@ final class EntityDeletionSubscriber implements EventSubscriberInterface {
       'deleted_by' => \Drupal::currentUser()->id(),
       'entity_type' => $entity_type,
       'bundle' => $bundle,
-      // 'created',
-      // 'changed',
-      // 'deleted_entity_author',
     ];
+
+    if (isset($deleted_entity->created)) {
+      $data['created'] = $deleted_entity->created;
+    }
+
+    if (isset($deleted_entity->changed)) {
+      $data['changed'] = $deleted_entity->changed;
+    }
+
+    if (isset($deleted_entity->uid)) {
+      $data['deleted_entity_author'] = $deleted_entity->uid;
+    }
 
     $record = \Drupal::entityTypeManager()->getStorage('deletion_record')->create($data);
     $record->save();
