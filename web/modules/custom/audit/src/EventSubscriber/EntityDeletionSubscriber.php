@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Drupal\audit\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Drupal\core_event_dispatcher\EntityHookEvents;
+use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
+use Drupal\content_moderation\Entity\ContentModerationStateInterface;
 
 /**
  * @todo Add description for this subscriber.
@@ -15,17 +15,41 @@ use Symfony\Component\HttpKernel\KernelEvents;
 final class EntityDeletionSubscriber implements EventSubscriberInterface {
 
   /**
-   * Kernel request event handler.
+   * Entity delete event handler.
    */
-  public function onKernelRequest(RequestEvent $event): void {
-    // @todo Place your code here.
-  }
+  public function logDeletion(EntityDeleteEvent $event): void {
+    $deleted_entity = $event->getEntity();
 
-  /**
-   * Kernel response event handler.
-   */
-  public function onKernelResponse(ResponseEvent $event): void {
-    // @todo Place your code here.
+    if ($deleted_entity instanceof ContentModerationStateInterface) {
+      return ;
+    }
+
+    $entity_type = $deleted_entity->getEntityTypeId();
+    $bundle = $deleted_entity->bundle();
+    $id = $deleted_entity->id();
+
+    $data = [
+      'label' => $entity_type . ' - ' . $bundle . ' with ID = ' . $id . ' ' . $deleted_entity->label(),
+      'deleted' => time(),
+      'deleted_by' => \Drupal::currentUser()->id(),
+      'entity_type' => $entity_type,
+      'bundle' => $bundle,
+    ];
+
+    if (isset($deleted_entity->created)) {
+      $data['created'] = $deleted_entity->created;
+    }
+
+    if (isset($deleted_entity->changed)) {
+      $data['changed'] = $deleted_entity->changed;
+    }
+
+    if (isset($deleted_entity->uid)) {
+      $data['deleted_entity_author'] = $deleted_entity->uid;
+    }
+
+    $record = \Drupal::entityTypeManager()->getStorage('deletion_record')->create($data);
+    $record->save();
   }
 
   /**
@@ -33,8 +57,7 @@ final class EntityDeletionSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents(): array {
     return [
-      KernelEvents::REQUEST => ['onKernelRequest'],
-      KernelEvents::RESPONSE => ['onKernelResponse'],
+      EntityHookEvents::ENTITY_DELETE => ['logDeletion']
     ];
   }
 

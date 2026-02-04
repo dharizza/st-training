@@ -75,10 +75,6 @@ class DeletionRecord extends ContentEntityBase implements DeletionRecordInterfac
    */
   public function preSave(EntityStorageInterface $storage): void {
     parent::preSave($storage);
-    if (!$this->getOwnerId()) {
-      // If no owner has been set explicitly, make the anonymous user the owner.
-      $this->setOwnerId(0);
-    }
   }
 
   /**
