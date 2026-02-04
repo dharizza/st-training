@@ -8,6 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\core_event_dispatcher\EntityHookEvents;
 use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
 use Drupal\content_moderation\Entity\ContentModerationStateInterface;
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
 
 /**
  * @todo Add description for this subscriber.
@@ -20,6 +21,12 @@ final class EntityDeletionSubscriber implements EventSubscriberInterface {
   public function logDeletion(EntityDeleteEvent $event): void {
     $deleted_entity = $event->getEntity();
 
+    // Do nothing for config entities.
+    if ($deleted_entity instanceof ConfigEntityInterface) {
+      return ;
+    }
+
+    // Do nothing for content moderation state entities.
     if ($deleted_entity instanceof ContentModerationStateInterface) {
       return ;
     }
