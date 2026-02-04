@@ -35,6 +35,12 @@ final class EntityDeletionSubscriber implements EventSubscriberInterface {
     $bundle = $deleted_entity->bundle();
     $id = $deleted_entity->id();
 
+    // Do nothing for path_aliases.
+    if ($entity_type == 'path_alias') {
+      return ;
+    }
+
+    // In all other cases create a DeletionRecord entity.
     $data = [
       'label' => $entity_type . ' - ' . $bundle . ' with ID = ' . $id . ' ' . $deleted_entity->label(),
       'deleted' => time(),
