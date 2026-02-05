@@ -42,7 +42,7 @@ final class IncidentReportForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Select the entity that was deleted incorrectly'),
       '#required' => TRUE,
-      '#options' => [],
+      '#options' => $this->getEntities(),
     ];
 
     $form['report'] = [
@@ -60,6 +60,21 @@ final class IncidentReportForm extends FormBase {
     ];
 
     return $form;
+  }
+
+  public function getEntities() {
+    $storage = \Drupal::entityTypeManager()->getStorage('deletion_record');
+    $query = $storage->getQuery();
+    $query->sort('deleted', 'DESC');
+    $query->accessCheck();
+    $ids = $query->execute();
+
+    $records = $storage->loadMultiple($ids);
+    $options = [];
+    foreach ($records as $key => $item) {
+      $options[$key] = $item->label->value;
+    }
+    return $options;
   }
 
   /**
