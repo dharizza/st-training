@@ -96,8 +96,11 @@ final class IncidentReportForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $reporterName = $form_state->getValue('reporter_name');
+    $reporterEmail = $form_state->getValue('reporter_email');
+    $entity = $form_state->getValue('entity');
+    $report = $form_state->getValue('report');
 
-    $eventObject = new IncidentReport($reporterName);
+    $eventObject = new IncidentReport($reporterName, $reporterEmail, $entity, $report);
     $event_dispatcher = \Drupal::service('event_dispatcher');
     $event_dispatcher->dispatch($eventObject, IncidentReportEvents::NEW_INCIDENT);
 
