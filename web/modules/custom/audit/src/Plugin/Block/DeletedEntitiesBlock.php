@@ -7,6 +7,7 @@ namespace Drupal\audit\Plugin\Block;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides a deleted entities block block.
@@ -43,6 +44,14 @@ final class DeletedEntitiesBlock extends BlockBase {
       '#markup' => $output,
     ];
     return $build;
+  }
+
+  public function getCacheTags() {
+    $tags = [
+      'deletion_record_list',
+    ];
+
+    return Cache::mergeTags(parent::getCacheTags(), $tags);
   }
 
 }
