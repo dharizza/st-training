@@ -9,6 +9,8 @@ use Drupal\core_event_dispatcher\EntityHookEvents;
 use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
 use Drupal\content_moderation\Entity\ContentModerationStateInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\audit\Event\IncidentReportEvents;
+use Drupal\audit\Event\IncidentReport;
 
 /**
  * @todo Add description for this subscriber.
@@ -66,11 +68,24 @@ final class EntityDeletionSubscriber implements EventSubscriberInterface {
   }
 
   /**
+   * If the new incident event is triggered, log it.
+   */
+  public function logIncident(IncidentReport $event) {
+    $name = $event->getReporterName();
+    $email = $event->getReporterEmail();
+    $report = $event->getReport();
+    $entity = $event->getEntity();
+
+    \Drupal::logger('audit')->alert("New incident reported by " . $name . " (" . $email . ") on entity " . $entity . ". Details: " . $report);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
     return [
-      EntityHookEvents::ENTITY_DELETE => ['logDeletion']
+      EntityHookEvents::ENTITY_DELETE => ['logDeletion'],
+      IncidentReportEvents::NEW_INCIDENT => ['logIncident'],
     ];
   }
 
