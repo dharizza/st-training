@@ -7,6 +7,10 @@ namespace Drupal\amd_blocks\Plugin\Block;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountProxy;
+use Drupal\amd_blocks\TextTransformations;
 
 /**
  * Provides an amd hello world block block.
@@ -16,17 +20,33 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   admin_label: new TranslatableMarkup('AMD Hello World Block'),
   category: new TranslatableMarkup('Custom'),
 )]
-final class HelloWorldBlock extends BlockBase {
+final class HelloWorldBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  protected AccountProxy $currentUser;
+  protected TextTransformations $textTransformer;
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('current_user'),
+      $container->get('amd_blocks.text_transformations')
+    );
+  }
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccountProxy $currentUser, TextTransformations $transformer) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->currentUser = $currentUser;
+    $this->textTransformer = $transformer;
+  }
 
   /**
    * {@inheritdoc}
    */
   public function build(): array {
-    $user = \Drupal::service('current_user');
-    $text_transformer = \Drupal::service('amd_blocks.text_transformations');
-
     $build['content'] = [
-      '#markup' => $this->t('Hello @username!', ['@username' => $text_transformer->titleCase($user->getAccountName())]),
+      '#markup' => $this->t('Hello @username!', ['@username' => $this->textTransformer->titleCase($this->currentUser->getAccountName())]),
     ];
     return $build;
   }
