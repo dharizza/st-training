@@ -8,11 +8,29 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\audit\Event\IncidentReport;
 use Drupal\audit\Event\IncidentReportEvents;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityTypeManager;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Provides a Audit form.
  */
 final class IncidentReportForm extends FormBase {
+
+  protected EntityTypeManager $entityTypeManager;
+  protected EventDispatcher $dispatcher;
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('event_dispatcher'),
+    );
+  }
+
+  public function __construct(EntityTypeManager $manager, EventDispatcher $dispatcher) {
+    $this->entityTypeManager = $manager;
+    $this->dispatcher = $dispatcher;
+  }
 
   /**
    * {@inheritdoc}
@@ -65,7 +83,7 @@ final class IncidentReportForm extends FormBase {
   }
 
   public function getEntities() {
-    $storage = \Drupal::entityTypeManager()->getStorage('deletion_record');
+    $storage = $this->entityTypeManager->getStorage('deletion_record');
     $query = $storage->getQuery();
     $query->sort('deleted', 'DESC');
     $query->accessCheck();
@@ -101,8 +119,7 @@ final class IncidentReportForm extends FormBase {
     $report = $form_state->getValue('report');
 
     $eventObject = new IncidentReport($reporterName, $reporterEmail, $entity, $report);
-    $event_dispatcher = \Drupal::service('event_dispatcher');
-    $event_dispatcher->dispatch($eventObject, IncidentReportEvents::NEW_INCIDENT);
+    $this->dispatcher->dispatch($eventObject, IncidentReportEvents::NEW_INCIDENT);
 
     $this->messenger()->addStatus($this->t('The message has been sent.'));
     $form_state->setRedirect('<front>');
