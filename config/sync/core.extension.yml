@@ -37,6 +37,7 @@ module:
   history: 0
   hook_event_dispatcher: 0
   image: 0
+  jsonapi: 0
   layout_builder: 0
   layout_discovery: 0
   link: 0
@@ -56,6 +57,7 @@ module:
   search: 0
   search_api: 0
   search_api_db: 0
+  serialization: 0
   shortcut: 0
   system: 0
   taxonomy: 0
