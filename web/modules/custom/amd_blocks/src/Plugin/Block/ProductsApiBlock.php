@@ -49,9 +49,21 @@ final class ProductsApiBlock extends BlockBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function build(): array {
-    $build['content'] = [
-      '#markup' => $this->t('It works!'),
-    ];
+    $response = $this->httpClient->request('GET', 'https://dummyjson.com/products');
+
+    if ($response->getStatusCode() == 200) {
+      $data = $response->getBody()->getContents();
+      $data = json_decode($data);
+
+      $product = array_pop($data->products);
+
+      $build['product_' . $product->id] = [
+        '#theme' => 'featured_product',
+        '#title' => $product->title,
+        '#price' => $product->price,
+      ];
+    }
+
     return $build;
   }
 
