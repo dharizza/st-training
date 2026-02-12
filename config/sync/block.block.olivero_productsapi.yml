@@ -1,0 +1,20 @@
+uuid: a820ca39-f33e-41f0-8e87-94aa5e2005a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - amd_blocks
+  theme:
+    - olivero
+id: olivero_productsapi
+theme: olivero
+region: sidebar
+weight: 0
+provider: null
+plugin: amd_blocks_products_api
+settings:
+  id: amd_blocks_products_api
+  label: 'Products API'
+  label_display: visible
+  provider: amd_blocks
+visibility: {  }
