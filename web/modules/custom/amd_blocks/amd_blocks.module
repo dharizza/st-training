@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * 
+ * Hook implementations for amd_blocks module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function amd_blocks_theme($existing, $type, $theme, $path) : array {
+  return [
+    'featured_product' => [
+      'variables' => [
+        'title' => NULL,
+        'img' => NULL,
+        'price' => 0,
+      ],
+    ],
+  ];
+}
